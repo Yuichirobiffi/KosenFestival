@@ -26,7 +26,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 	// 後退速度
 	public float backwardSpeed = 2.0f;
 	// 旋回速度
-	public float rotateSpeed = 2.0f;
+	public float rotateSpeed = 5.0f;
 	// ジャンプ威力
 	public float jumpPower = 3.0f; 
 	// キャラクターコントローラ（カプセルコライダ）の参照
@@ -34,6 +34,8 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 	private Rigidbody rb;
 	// キャラクターコントローラ（カプセルコライダ）の移動量
 	private Vector3 velocity;
+
+    private Vector3 velocity_x;
 	// CapsuleColliderで設定されているコライダのHeiht、Centerの初期値を収める変数
 	private float orgColHight;
 	private Vector3 orgVectColCenter;
@@ -79,8 +81,10 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		
 		
 		// 以下、キャラクターの移動処理
-		velocity = new Vector3(0, 0, v);		// 上下のキー入力からZ軸方向の移動量を取得
-		// キャラクターのローカル空間での方向に変換
+		velocity = new Vector3(0, 0, v);        // 上下のキー入力からZ軸方向の移動量を取得
+
+        velocity_x = new Vector3(h, 0, 0);
+        // キャラクターのローカル空間での方向に変換
 		velocity = transform.TransformDirection(velocity);
 		//以下のvの閾値は、Mecanim側のトランジションと一緒に調整する
 		if (v > 0.1) {
@@ -88,32 +92,38 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		} else if (v < -0.1) {
 			velocity *= backwardSpeed;	// 移動速度を掛ける
 		}
-		
-		if (Input.GetButtonDown("Jump")) {	// スペースキーを入力したら
+        
+        velocity_x *= rotateSpeed;
 
-			//アニメーションのステートがLocomotionの最中のみジャンプできる
-			if (currentBaseState.nameHash == locoState){
-				//ステート遷移中でなかったらジャンプできる
-				if(!anim.IsInTransition(0))
-				{
-						rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
-						anim.SetBool("Jump", true);		// Animatorにジャンプに切り替えるフラグを送る
-				}
-			}
-		}
-		
+        /*if (Input.GetButtonDown("Jump"))
+        {   // スペースキーを入力したら
 
-		// 上下のキー入力でキャラクターを移動させる
-		transform.localPosition += velocity * Time.fixedDeltaTime;
+            //アニメーションのステートがLocomotionの最中のみジャンプできる
+            if (currentBaseState.nameHash == locoState)
+            {
+                //ステート遷移中でなかったらジャンプできる
+                if (!anim.IsInTransition(0))
+                {
+                    rb.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
+                    anim.SetBool("Jump", true);     // Animatorにジャンプに切り替えるフラグを送る
+                }
+            }
+        }*/
 
-		// 左右のキー入力でキャラクタをY軸で旋回させる
-		transform.Rotate(0, h * rotateSpeed, 0);	
-	
 
-		// 以下、Animatorの各ステート中での処理
-		// Locomotion中
-		// 現在のベースレイヤーがlocoStateの時
-		if (currentBaseState.nameHash == locoState){
+            // 上下のキー入力でキャラクターを移動させる
+            transform.localPosition += velocity * Time.fixedDeltaTime;
+
+        // 左右のキー入力でキャラクタをY軸で旋回させる
+        //transform.Rotate(0, h * rotateSpeed, 0);
+
+        transform.localPosition += velocity_x * Time.fixedDeltaTime;
+        //左右のキー入力でキャラを横に平行移動
+
+        // 以下、Animatorの各ステート中での処理
+        // Locomotion中
+        // 現在のベースレイヤーがlocoStateの時
+        if (currentBaseState.nameHash == locoState){
 			//カーブでコライダ調整をしている時は、念のためにリセットする
 			if(useCurves){
 				resetCollider();
