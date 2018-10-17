@@ -25,10 +25,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 	public float forwardSpeed = 7.0f;
 	// 後退速度
 	public float backwardSpeed = 2.0f;
+
+    /*
     //横移動速度
     public float sidewardSpeed = 5.0f;
 
-    /*
     // 旋回速度
 	public float rotateSpeed = 2.0f;
 
@@ -41,7 +42,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 	private Rigidbody rb;
 	// キャラクターコントローラ（カプセルコライダ）の移動量
 	private Vector3 velocity;
-    private Vector3 velocitySide;
+    //private Vector3 velocitySide;
     // CapsuleColliderで設定されているコライダのHeiht、Centerの初期値を収める変数
     private float orgColHight;
 	private Vector3 orgVectColCenter;
@@ -76,7 +77,10 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 // 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
 	void FixedUpdate ()
 	{
-		float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
+        //現在位置取得
+        Transform myTransForm = this.transform;
+
+        float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
 		float v = Input.GetAxis("Vertical");				// 入力デバイスの垂直軸をvで定義
 		anim.SetFloat("Speed", v);							// Animator側で設定している"Speed"パラメタにvを渡す
 		anim.SetFloat("Direction", h); 						// Animator側で設定している"Direction"パラメタにhを渡す
@@ -97,16 +101,35 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		} else if (v < -0.1) {
 			velocity *= backwardSpeed;	// 移動速度を掛ける
 		}
+
+        /*
         //横移動
         velocitySide = new Vector3(h, 0, 0);        // 左右のキー入力からX軸方向の移動量を取得
         // キャラクターのローカル空間での方向に変換
         velocitySide = transform.TransformDirection(velocitySide);
         velocitySide *= sidewardSpeed;  // 移動速度を掛ける
+        */
 
         // 上下のキー入力でキャラクターを移動させる
         transform.localPosition += velocity * Time.fixedDeltaTime;
+        
+        //左右矢印、ADで左右(瞬間)移動
+        if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        {
+            Vector3 pos = myTransForm.position;
+            pos.x += 1.0f;
+            myTransForm.position = pos;
+        } else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        {
+            Vector3 pos = myTransForm.position;
+            pos.x -= 1.0f;
+            myTransForm.position = pos;
+        }
+
+        /*
         //左右のキー入力でキャラクタを移動させる
         transform.localPosition += velocitySide * Time.fixedDeltaTime;
+        */
 
         /*
 		if (Input.GetButtonDown("Jump")) {	// スペースキーを入力したら
