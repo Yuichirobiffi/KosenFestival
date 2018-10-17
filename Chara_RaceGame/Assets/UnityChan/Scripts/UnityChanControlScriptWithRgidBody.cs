@@ -89,6 +89,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 			velocity *= backwardSpeed;	// 移動速度を掛ける
 		}
 		
+        /*
 		if (Input.GetButtonDown("Jump")) {	// スペースキーを入力したら
 
 			//アニメーションのステートがLocomotionの最中のみジャンプできる
@@ -101,7 +102,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 				}
 			}
 		}
-		
+		*/
 
 		// 上下のキー入力でキャラクターを移動させる
 		transform.localPosition += velocity * Time.fixedDeltaTime;
@@ -168,10 +169,12 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 			if(useCurves){
 				resetCollider();
 			}
+            /*
 			// スペースキーを入力したらRest状態になる
 			if (Input.GetButtonDown("Jump")) {
 				anim.SetBool("Rest", true);
 			}
+            */
 		}
 		// REST中の処理
 		// 現在のベースレイヤーがrestStateの時
