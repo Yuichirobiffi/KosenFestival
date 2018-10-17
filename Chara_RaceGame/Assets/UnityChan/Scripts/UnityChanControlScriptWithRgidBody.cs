@@ -14,7 +14,7 @@ using System.Collections;
 public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 {
 
-	public float animSpeed = 1.5f;				// アニメーション再生速度設定
+	public float animSpeed = 10.0f;				// アニメーション再生速度設定
 	public float lookSmoother = 3.0f;			// a smoothing setting for camera motion
 	//public bool useCurves = true;				// Mecanimでカーブ調整を使うか設定する
 												// このスイッチが入っていないとカーブは使われない
@@ -77,6 +77,9 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 // 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
 	void FixedUpdate ()
 	{
+        //アニメ終了(左右移動のやつ)
+        anim.SetBool("Jump", false);
+
         //現在位置取得
         Transform myTransForm = this.transform;
 
@@ -110,17 +113,21 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
         velocitySide *= sidewardSpeed;  // 移動速度を掛ける
         */
 
-        // 上下のキー入力でキャラクターを移動させる
+        //上下のキー入力でキャラクターを移動させる
         transform.localPosition += velocity * Time.fixedDeltaTime;
-        
-        //左右矢印、ADで左右(瞬間)移動
-        if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+
+        //左右のキー入力でキャラクターを移動させる
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
+            anim.SetBool("Jump", true);
+
             Vector3 pos = myTransForm.position;
             pos.x += 1.0f;
             myTransForm.position = pos;
         } else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
+            anim.SetBool("Jump", true);
+
             Vector3 pos = myTransForm.position;
             pos.x -= 1.0f;
             myTransForm.position = pos;
@@ -150,8 +157,6 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		// 左右のキー入力でキャラクタをY軸で旋回させる
 		transform.Rotate(0, h * rotateSpeed, 0);	
 	    */
-
-
 
         // 以下、Animatorの各ステート中での処理
         // Locomotion中
@@ -260,4 +265,5 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		col.height = orgColHight;
 		col.center = orgVectColCenter;
 	}
+
 }
