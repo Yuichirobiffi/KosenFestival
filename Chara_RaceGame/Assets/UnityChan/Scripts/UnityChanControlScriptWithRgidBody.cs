@@ -16,26 +16,34 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 
 	public float animSpeed = 1.5f;				// アニメーション再生速度設定
 	public float lookSmoother = 3.0f;			// a smoothing setting for camera motion
-	public bool useCurves = true;				// Mecanimでカーブ調整を使うか設定する
+	//public bool useCurves = true;				// Mecanimでカーブ調整を使うか設定する
 												// このスイッチが入っていないとカーブは使われない
-	public float useCurvesHeight = 0.5f;		// カーブ補正の有効高さ（地面をすり抜けやすい時には大きくする）
+	//public float useCurvesHeight = 0.5f;		// カーブ補正の有効高さ（地面をすり抜けやすい時には大きくする）
 
 	// 以下キャラクターコントローラ用パラメタ
 	// 前進速度
 	public float forwardSpeed = 7.0f;
 	// 後退速度
 	public float backwardSpeed = 2.0f;
-	// 旋回速度
+    //横移動速度
+    public float sidewardSpeed = 5.0f;
+
+    /*
+    // 旋回速度
 	public float rotateSpeed = 2.0f;
-	// ジャンプ威力
-	public float jumpPower = 3.0f; 
+
+    // ジャンプ威力
+    public float jumpPower = 3.0f; 
+    */
+
 	// キャラクターコントローラ（カプセルコライダ）の参照
 	private CapsuleCollider col;
 	private Rigidbody rb;
 	// キャラクターコントローラ（カプセルコライダ）の移動量
 	private Vector3 velocity;
-	// CapsuleColliderで設定されているコライダのHeiht、Centerの初期値を収める変数
-	private float orgColHight;
+    private Vector3 velocitySide;
+    // CapsuleColliderで設定されているコライダのHeiht、Centerの初期値を収める変数
+    private float orgColHight;
 	private Vector3 orgVectColCenter;
 	
 	private Animator anim;							// キャラにアタッチされるアニメーターへの参照
@@ -79,6 +87,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		
 		
 		// 以下、キャラクターの移動処理
+        //前後移動
 		velocity = new Vector3(0, 0, v);		// 上下のキー入力からZ軸方向の移動量を取得
 		// キャラクターのローカル空間での方向に変換
 		velocity = transform.TransformDirection(velocity);
@@ -88,7 +97,17 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		} else if (v < -0.1) {
 			velocity *= backwardSpeed;	// 移動速度を掛ける
 		}
-		
+        //横移動
+        velocitySide = new Vector3(h, 0, 0);        // 左右のキー入力からX軸方向の移動量を取得
+        // キャラクターのローカル空間での方向に変換
+        velocitySide = transform.TransformDirection(velocitySide);
+        velocitySide *= sidewardSpeed;  // 移動速度を掛ける
+
+        // 上下のキー入力でキャラクターを移動させる
+        transform.localPosition += velocity * Time.fixedDeltaTime;
+        //左右のキー入力でキャラクタを移動させる
+        transform.localPosition += velocitySide * Time.fixedDeltaTime;
+
         /*
 		if (Input.GetButtonDown("Jump")) {	// スペースキーを入力したら
 
@@ -104,22 +123,26 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		}
 		*/
 
-		// 上下のキー入力でキャラクターを移動させる
-		transform.localPosition += velocity * Time.fixedDeltaTime;
-
+        /*
 		// 左右のキー入力でキャラクタをY軸で旋回させる
 		transform.Rotate(0, h * rotateSpeed, 0);	
-	
+	    */
 
-		// 以下、Animatorの各ステート中での処理
-		// Locomotion中
-		// 現在のベースレイヤーがlocoStateの時
-		if (currentBaseState.nameHash == locoState){
+
+
+        // 以下、Animatorの各ステート中での処理
+        // Locomotion中
+        // 現在のベースレイヤーがlocoStateの時
+        /*
+        if (currentBaseState.nameHash == locoState){
 			//カーブでコライダ調整をしている時は、念のためにリセットする
 			if(useCurves){
 				resetCollider();
 			}
 		}
+        */
+
+        /*
 		// JUMP中の処理
 		// 現在のベースレイヤーがjumpStateの時
 		else if(currentBaseState.nameHash == jumpState)
@@ -161,9 +184,12 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 				anim.SetBool("Jump", false);
 			}
 		}
-		// IDLE中の処理
-		// 現在のベースレイヤーがidleStateの時
-		else if (currentBaseState.nameHash == idleState)
+        */
+
+        /*
+        // IDLE中の処理
+        // 現在のベースレイヤーがidleStateの時
+        else if (currentBaseState.nameHash == idleState)
 		{
 			//カーブでコライダ調整をしている時は、念のためにリセットする
 			if(useCurves){
@@ -174,8 +200,10 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 			if (Input.GetButtonDown("Jump")) {
 				anim.SetBool("Rest", true);
 			}
-            */
 		}
+        */
+
+        /*
 		// REST中の処理
 		// 現在のベースレイヤーがrestStateの時
 		else if (currentBaseState.nameHash == restState)
@@ -187,9 +215,10 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 				anim.SetBool("Rest", false);
 			}
 		}
-	}
+        */
+    }
 
-	void OnGUI()
+    void OnGUI()
 	{
 		GUI.Box(new Rect(Screen.width -260, 10 ,250 ,150), "Interaction");
 		GUI.Label(new Rect(Screen.width -245,30,250,30),"Up/Down Arrow : Go Forwald/Go Back");
