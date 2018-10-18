@@ -84,11 +84,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
         //現在位置取得
         Transform myTransForm = this.transform;
 
-        float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
-		float v = Input.GetAxis("Vertical");				// 入力デバイスの垂直軸をvで定義
+        //float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
+		//float v = Input.GetAxis("Vertical");				// 入力デバイスの垂直軸をvで定義
 		//anim.SetFloat("Speed", v);							// Animator側で設定している"Speed"パラメタにvを渡す
         anim.SetFloat("Speed", 1);                          // Animator側で設定している"Speed"パラメタに1を渡す
-        anim.SetFloat("Direction", h); 						// Animator側で設定している"Direction"パラメタにhを渡す
+        //anim.SetFloat("Direction", h); 						// Animator側で設定している"Direction"パラメタにhを渡す
 		anim.speed = animSpeed;								// Animatorのモーション再生速度に animSpeedを設定する
 		currentBaseState = anim.GetCurrentAnimatorStateInfo(0);	// 参照用のステート変数にBase Layer (0)の現在のステートを設定する
 		rb.useGravity = true;//ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
@@ -258,7 +258,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		}
         */
     }
-
+    /*
     void OnGUI()
 	{
 		GUI.Box(new Rect(Screen.width -260, 10 ,250 ,150), "Interaction");
@@ -269,7 +269,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		GUI.Label(new Rect(Screen.width -245,110,250,30),"Left Control : Front Camera");
 		GUI.Label(new Rect(Screen.width -245,130,250,30),"Alt : LookAt Camera");
 	}
-
+    */
 
 	// キャラクターのコライダーサイズのリセット関数
 	void resetCollider()
