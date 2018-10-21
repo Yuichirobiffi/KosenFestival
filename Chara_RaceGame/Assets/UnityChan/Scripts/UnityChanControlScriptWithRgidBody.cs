@@ -28,6 +28,9 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
     // 後退速度
     public float backwardSpeed = 2.0f;
 
+    // ゴールしてたら0になって横移動封じるやつ
+    public float sideSpeed = 1.0f;
+
     /*
     //横移動速度
     public float sidewardSpeed = 5.0f;
@@ -73,13 +76,14 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
         // CapsuleColliderコンポーネントのHeight、Centerの初期値を保存する
         orgColHight = col.height;
         orgVectColCenter = col.center;
+
     }
 
 
     // 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
     void FixedUpdate()
     {
-
+        //Jumpモーション停止
         anim.SetBool("Jump", false);
 
         //現在位置取得
@@ -129,7 +133,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
             anim.SetBool("Jump", true);
 
             Vector3 pos = myTransForm.position;
-            pos.x += 1.0f;
+            pos.x += 1.0f * sideSpeed;
             myTransForm.position = pos;
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
@@ -138,7 +142,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
             anim.SetBool("Jump", true);
 
             Vector3 pos = myTransForm.position;
-            pos.x -= 1.0f;
+            pos.x -= 1.0f * sideSpeed;
             myTransForm.position = pos;
         }
 
@@ -263,6 +267,9 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
             }
         }
         */
+
+        //Debug.Log(velocity);
+        //Debug.Log(forwardSpeed);
     }
     /*
     void OnGUI()
@@ -284,4 +291,26 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
         col.height = orgColHight;
         col.center = orgVectColCenter;
     }
+
+    //Goal判定
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag == "goal")
+        {
+            //Debug.Log("Goal");
+
+            //180度回転
+            transform.Rotate(0,180, 0);
+
+            //ゴールアニメーション開始
+            anim.SetBool("Goal", true);
+            
+            //前進停止
+            velocity = new Vector3(0, 0, 0);
+            forwardSpeed = 0;
+            sideSpeed = 0;
+            anim.SetFloat("Speed", 0);
+        }
+    }
+
 }

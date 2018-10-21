@@ -34,27 +34,26 @@ public class ThirdPersonCamera : MonoBehaviour
 			transform.forward = standardPos.forward;	
 	}
 
-	
-	void FixedUpdate ()	// このカメラ切り替えはFixedUpdate()内でないと正常に動かない
-	{
-		
-		if(Input.GetButton("Fire1"))	// left Ctlr
-		{	
-			// Change Front Camera
-			setCameraPositionFrontView();
-		}
-		
-		else if(Input.GetButton("Fire2"))	//Alt
-		{	
-			// Change Jump Camera
-			setCameraPositionJumpView();
-		}
-		
-		else
-		{	
-			// return the camera to standard position and direction
-			setCameraPositionNormalView();
-		}
+
+    void FixedUpdate()  // このカメラ切り替えはFixedUpdate()内でないと正常に動かない
+    {
+            if (Input.GetButton("Fire1"))   // left Ctlr
+            {
+                // Change Front Camera
+                setCameraPositionFrontView();
+            }
+
+            else if (Input.GetButton("Fire2"))  //Alt
+            {
+                // Change Jump Camera
+                setCameraPositionJumpView();
+            }
+
+            else
+            {
+                // return the camera to standard position and direction
+                setCameraPositionNormalView();
+            }
 	}
 
 	void setCameraPositionNormalView()
