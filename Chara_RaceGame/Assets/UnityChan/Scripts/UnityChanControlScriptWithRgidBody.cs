@@ -95,21 +95,25 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour{
 
         //右移動
         if (Input.GetKeyDown(KeyCode.D)){
-            //Jumpアニメ開始
-            anim.SetBool("Jump", true);
             //現在位置取得
             Vector3 pos = myTransForm.position;
-            pos.x += 1.0f * is_Goaling_Not;
-            myTransForm.position = pos;
+            if(pos.x <= 2.1) {
+                //Jumpアニメ開始
+                anim.SetBool("Jump", true);
+                pos.x += 1.0f * is_Goaling_Not;
+                myTransForm.position = pos;
+            }
         }
         //左移動
-        else if (Input.GetKeyDown(KeyCode.A)){
-            //Jumpアニメ開始
-            anim.SetBool("Jump", true);
+        if (Input.GetKeyDown(KeyCode.A)){
             //現在位置取得
             Vector3 pos = myTransForm.position;
-            pos.x -= 1.0f * is_Goaling_Not;
-            myTransForm.position = pos;
+            if(pos.x >= -0.1) {
+                //Jumpアニメ開始
+                anim.SetBool("Jump", true);
+                pos.x -= 1.0f * is_Goaling_Not;
+                myTransForm.position = pos;
+            }
         }
     }
 
