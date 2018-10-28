@@ -25902,6 +25902,7 @@ GameObject:
   - component: {fileID: 1963856379}
   - component: {fileID: 1963856378}
   - component: {fileID: 1963856380}
+  - component: {fileID: 1963856381}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -25946,7 +25947,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorPrefab: {fileID: 1463979458935992, guid: cff3fb6201dd3404092bb9c0966f2164,
     type: 2}
-  GoalPrefab: {fileID: 1106562486591452, guid: 5e163be86cb8e324da607dd94f7c2dec, type: 2}
+  GoalPrefab: {fileID: 1519982377775658, guid: 5e163be86cb8e324da607dd94f7c2dec, type: 2}
+--- !u!114 &1963856381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1963856377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d8a87c35c9a9e4bb649a4e8bc5827b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WallPrefab: {fileID: 1170460447594456, guid: b4861289d2b37bf46bcecb4fd6113571, type: 2}
+  SpeedUpPrefab: {fileID: 1288568648495884, guid: d212cb907f36d4343a2efb30e3af88b3,
+    type: 2}
+  SpeedDownPrefab: {fileID: 1520617984093584, guid: fbf26e4e91d425e4da1f50c2429964ef,
+    type: 2}
 --- !u!1 &1972528589
 GameObject:
   m_ObjectHideFlags: 0

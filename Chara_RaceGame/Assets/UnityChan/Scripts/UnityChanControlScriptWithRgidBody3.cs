@@ -150,6 +150,29 @@ public class UnityChanControlScriptWithRgidBody3 : MonoBehaviour{
             is_Goaling_Not = 0;
             
         }
+
+        if (other.gameObject.tag == "speedup"){
+            //前進速度上昇
+            forwardSpeed += 0.3f;
+            //Debug.Log(forwardSpeed);
+        }
+
+        if (other.gameObject.tag == "speeddown"){
+            //前進速度低下
+            forwardSpeed -= 0.3f;
+            //Debug.Log(forwardSpeed);
+        }
+
+        if (other.gameObject.tag == "wall"){
+            //Jumpアニメーションを流用します。
+            anim.SetBool("Jump", true);
+            //後跳んでけ
+            Rigidbody RB = this.GetComponent<Rigidbody>();
+            Vector3 force = new Vector3(0, 0, 80.0f);
+            RB.AddForce(force, ForceMode.Impulse);
+            //Debug.Log(forwardSpeed);
+        }
+
     }
 
 }
