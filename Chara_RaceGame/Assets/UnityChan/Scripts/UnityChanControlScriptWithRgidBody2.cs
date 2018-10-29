@@ -65,23 +65,41 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
 
     // 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
     void FixedUpdate(){
-        //Jumpアニメ停止
-        anim.SetBool("Jump", false);
 
-        //現在位置取得
-        Transform myTransForm = this.transform;
-
-        //前進アニメ常時設定
-        anim.SetFloat("Speed", 1);
-
-        //よくわからん
+        //よくわからん//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Animatorのモーション再生速度に animSpeedを設定する
         anim.speed = animSpeed;
         // 参照用のステート変数にBase Layer (0)の現在のステートを設定する
         currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
         //ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
         rb.useGravity = true;
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //Jumpアニメ停止
+        anim.SetBool("Jump", false);
+        //前進アニメ常時設定
+        anim.SetFloat("Speed", 1);
+
+        //現在位置取得
+        Transform myTransForm = this.transform;
+        Vector3 pos = myTransForm.position;
+
+        //位置ズレ防止用
+        if (pos.z < -0.5){
+            pos.z = -1;
+        }
+        else if (pos.z < 0.5){
+            pos.z = 0;
+        }
+        else if (pos.z < 1.5){
+            pos.z = 1;
+        }
+        else if (pos.z < 2.5){
+            pos.z = 2;
+        }
+        else{
+            pos.z = 3;
+        }
 
         //前移動
         velocity = new Vector3(0, 0, 1);
@@ -92,27 +110,38 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
         //キャラクター前進
         transform.localPosition += velocity * Time.fixedDeltaTime;
 
-
         //右移動
         if (Input.GetKeyDown(KeyCode.D)){
-            //現在位置取得
-            Vector3 pos = myTransForm.position;
-            if (pos.z >= -0.1) {
+            //移動しすぎ防止に使うやつ
+            Vector3 old = pos;
+            //移動制限
+            if (pos.z >= -0.5) {
                 //Jumpアニメ開始
                 anim.SetBool("Jump", true);
+                //横移動
                 pos.z -= 1.0f * is_Goaling_Not;
                 myTransForm.position = pos;
+                //移動しすぎ防止用
+                if (old.z - pos.z > 1.5){
+                    pos.z += 1.0f * is_Goaling_Not;
+                }
             }
         }
         //左移動
         if (Input.GetKeyDown(KeyCode.A)){
-            //現在位置取得
-            Vector3 pos = myTransForm.position;
-            if (pos.z <= 2.1) {
+            //移動しすぎ防止に使うやつ
+            Vector3 old = pos;
+            //移動制限
+            if (pos.z <= 2.5) {
                 //Jumpアニメ開始
                 anim.SetBool("Jump", true);
+                //横移動
                 pos.z += 1.0f * is_Goaling_Not;
                 myTransForm.position = pos;
+                //移動しすぎ防止用
+                if (pos.z - old.z > 1.5){
+                    pos.z -= 1.0f * is_Goaling_Not;
+                }
             }
         }
     }
