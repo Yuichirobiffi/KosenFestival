@@ -62,7 +62,7 @@ public class Wall_gene : MonoBehaviour {
             num = Random.Range(0, 6);
             if (num != 5){
                 GameObject Wall = Instantiate(WallPrefab) as GameObject;
-                Wall.transform.position = new Vector3(side[num], 1, boxLengthPlus[i]);
+                Wall.transform.position = new Vector3(side[num], 0.75f, boxLengthPlus[i]);
             }
         }//Player1 Wall
 
@@ -72,10 +72,10 @@ public class Wall_gene : MonoBehaviour {
                 ud = Random.Range(0, 2);
                 if(ud == 0){
                     GameObject SpeedUp = Instantiate(SpeedUpPrefab) as GameObject;
-                    SpeedUp.transform.position = new Vector3(side[num], 0.5f, floorLengthPlus[i]);
+                    SpeedUp.transform.position = new Vector3(side[num], 0.25f, floorLengthPlus[i]);
                 } else{
                     GameObject SpeedDown = Instantiate(SpeedDownPrefab) as GameObject;
-                    SpeedDown.transform.position = new Vector3(side[num], 0.5f, floorLengthPlus[i]);
+                    SpeedDown.transform.position = new Vector3(side[num], 0.25f, floorLengthPlus[i]);
                 }
             }
         }//Player1 Floor
@@ -87,7 +87,7 @@ public class Wall_gene : MonoBehaviour {
             if (num != 5)
             {
                 GameObject Wall = Instantiate(WallPrefab) as GameObject;
-                Wall.transform.position = new Vector3(boxLengthPlus[i], 1, side[num]);
+                Wall.transform.position = new Vector3(boxLengthPlus[i], 0.75f, side[num]);
             }
         }//Player2 Wall
 
@@ -97,11 +97,11 @@ public class Wall_gene : MonoBehaviour {
                 ud = Random.Range(0, 2);
                 if (ud == 0){
                     GameObject SpeedUp = Instantiate(SpeedUpPrefab) as GameObject;
-                    SpeedUp.transform.position = new Vector3(floorLengthPlus[i], 0.5f, side[num]);
+                    SpeedUp.transform.position = new Vector3(floorLengthPlus[i], 0.25f, side[num]);
                 }
                 else{
                     GameObject SpeedDown = Instantiate(SpeedDownPrefab) as GameObject;
-                    SpeedDown.transform.position = new Vector3(floorLengthPlus[i], 0.5f, side[num]);
+                    SpeedDown.transform.position = new Vector3(floorLengthPlus[i], 0.25f, side[num]);
                 }
             }
         }//Player2 Floor
@@ -111,7 +111,7 @@ public class Wall_gene : MonoBehaviour {
             num = Random.Range(0, 6);
             if (num != 5){
                 GameObject Wall = Instantiate(WallPrefab) as GameObject;
-                Wall.transform.position = new Vector3(side[num], 1, boxLengthMinus[i]);
+                Wall.transform.position = new Vector3(side[num], 0.75f, boxLengthMinus[i]);
             }
         }//Player3 Wall
 
@@ -121,10 +121,10 @@ public class Wall_gene : MonoBehaviour {
                 ud = Random.Range(0, 2);
                 if (ud == 0){
                     GameObject SpeedUp = Instantiate(SpeedUpPrefab) as GameObject;
-                    SpeedUp.transform.position = new Vector3(side[num], 0.5f, floorLengthMinus[i]);
+                    SpeedUp.transform.position = new Vector3(side[num], 0.25f, floorLengthMinus[i]);
                 } else{
                     GameObject SpeedDown = Instantiate(SpeedDownPrefab) as GameObject;
-                    SpeedDown.transform.position = new Vector3(side[num], 0.5f, floorLengthMinus[i]);
+                    SpeedDown.transform.position = new Vector3(side[num], 0.25f, floorLengthMinus[i]);
                 }
             }
         }//Player3 Floor
@@ -134,7 +134,7 @@ public class Wall_gene : MonoBehaviour {
             num = Random.Range(0, 6);
             if (num != 5){
                 GameObject Wall = Instantiate(WallPrefab) as GameObject;
-                Wall.transform.position = new Vector3(boxLengthMinus[i], 1, side[num]);
+                Wall.transform.position = new Vector3(boxLengthMinus[i], 0.75f, side[num]);
             }
         }//Player4 Wall
 
@@ -144,11 +144,11 @@ public class Wall_gene : MonoBehaviour {
                 ud = Random.Range(0, 2);
                 if (ud == 0){
                     GameObject SpeedUp = Instantiate(SpeedUpPrefab) as GameObject;
-                    SpeedUp.transform.position = new Vector3(floorLengthMinus[i], 0.5f, side[num]);
+                    SpeedUp.transform.position = new Vector3(floorLengthMinus[i], 0.25f, side[num]);
                 }
                 else{
                     GameObject SpeedDown = Instantiate(SpeedDownPrefab) as GameObject;
-                    SpeedDown.transform.position = new Vector3(floorLengthMinus[i], 0.5f, side[num]);
+                    SpeedDown.transform.position = new Vector3(floorLengthMinus[i], 0.25f, side[num]);
                 }
             }
         }//Player4 Floor

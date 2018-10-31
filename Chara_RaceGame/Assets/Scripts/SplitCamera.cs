@@ -39,6 +39,7 @@ public class SplitCamera : MonoBehaviour
             Player4.rect = new Rect(0.5f, 0f, 0.5f, 0.5f);
 
             //　枠の幅を変更する
+            /*
             var waku1Rect = waku1.Find("Bottom").GetComponent<RectTransform>();
             waku1Rect.localScale = new Vector3(waku1Rect.localScale.x, waku1Rect.localScale.y / 2f, waku1Rect.localScale.z);
             waku1Rect = waku1.Find("Right").GetComponent<RectTransform>();
@@ -58,6 +59,7 @@ public class SplitCamera : MonoBehaviour
             waku4Rect.localScale = new Vector3(waku4Rect.localScale.x, waku4Rect.localScale.y / 2f, waku4Rect.localScale.z);
             waku4Rect = waku4.Find("Left").GetComponent<RectTransform>();
             waku4Rect.localScale = new Vector3(waku4Rect.localScale.x / 2f, waku4Rect.localScale.y, waku4Rect.localScale.z);
+            */
         }
     }
 }

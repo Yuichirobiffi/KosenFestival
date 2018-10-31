@@ -30,9 +30,9 @@ public class UnityChanControlScriptWithRgidBody3 : MonoBehaviour{
     // キャラにアタッチされるアニメーターへの参照
     private Animator anim;
     // base layerで使われる、アニメーターの現在の状態の参照
-    private AnimatorStateInfo currentBaseState;
+    //private AnimatorStateInfo currentBaseState;
     // メインカメラへの参照
-    private GameObject cameraObject;
+    //private GameObject cameraObject;
 
     // 前進速度
     public float forwardSpeed = 7.0f;
@@ -40,11 +40,12 @@ public class UnityChanControlScriptWithRgidBody3 : MonoBehaviour{
     // ゴール してる：0 してない:1
     public float is_Goaling_Not = 1.0f;
     
-    // アニメーター各ステートへの参照
+    /* アニメーター各ステートへの参照
     static int idleState = Animator.StringToHash("Base Layer.Idle");
     static int locoState = Animator.StringToHash("Base Layer.Locomotion");
     static int jumpState = Animator.StringToHash("Base Layer.Jump");
     static int restState = Animator.StringToHash("Base Layer.Rest");
+    */
 
     // 初期化
     void Start(){
@@ -54,12 +55,12 @@ public class UnityChanControlScriptWithRgidBody3 : MonoBehaviour{
         col = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
         //メインカメラを取得する
-        cameraObject = GameObject.FindWithTag("MainCamera");
+        //cameraObject = GameObject.FindWithTag("MainCamera");
         // CapsuleColliderコンポーネントのHeight、Centerの初期値を保存する
         orgColHight = col.height;
         orgVectColCenter = col.center;
         //位置初期化
-        transform.position = new Vector3(1.0f, 0.5f, -10.0f);
+        transform.position = new Vector3(1.0f, 0.25f, -10.0f);
     }
 
 
@@ -70,7 +71,7 @@ public class UnityChanControlScriptWithRgidBody3 : MonoBehaviour{
         // Animatorのモーション再生速度に animSpeedを設定する
         anim.speed = animSpeed;
         // 参照用のステート変数にBase Layer (0)の現在のステートを設定する
-        currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
+        //currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
         //ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
         rb.useGravity = true;
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

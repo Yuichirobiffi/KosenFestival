@@ -4,6 +4,7 @@
 -langversion:4
 -out:Temp/Assembly-CSharp.dll
 -nostdlib
+-r:Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.AIModule.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ARModule.dll"
@@ -66,7 +67,6 @@
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.XRModule.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEditor.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/Unity.Locator.dll"
--r:Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
 -r:Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
 -r:Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
 -r:Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
@@ -100,7 +100,7 @@
 -define:UNITY_2017_4_OR_NEWER
 -define:UNITY_2018_1_OR_NEWER
 -define:UNITY_2018_2_OR_NEWER
--define:UNITY_2018_2_13
+-define:UNITY_2018_2_14
 -define:UNITY_2018_2
 -define:UNITY_2018
 -define:PLATFORM_ARCH_64

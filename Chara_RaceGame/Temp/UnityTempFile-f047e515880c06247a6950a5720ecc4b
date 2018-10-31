@@ -2,8 +2,12 @@
 -target:library
 -nowarn:0169
 -langversion:4
--out:Temp/Assembly-CSharp.dll
+-out:Temp/Assembly-CSharp-firstpass.dll
 -nostdlib
+-r:Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
+-r:Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
+-r:Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
+-r:Library/ScriptAssemblies/Unity.TextMeshPro.dll
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.AIModule.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.ARModule.dll"
@@ -66,11 +70,6 @@
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEngine/UnityEngine.XRModule.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/UnityEditor.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Managed/Unity.Locator.dll"
--r:Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll
--r:Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
--r:Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
--r:Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
--r:Library/ScriptAssemblies/Unity.TextMeshPro.dll
 -r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
 -r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll"
 -r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll"
@@ -100,7 +99,7 @@
 -define:UNITY_2017_4_OR_NEWER
 -define:UNITY_2018_1_OR_NEWER
 -define:UNITY_2018_2_OR_NEWER
--define:UNITY_2018_2_13
+-define:UNITY_2018_2_14
 -define:UNITY_2018_2
 -define:UNITY_2018
 -define:PLATFORM_ARCH_64
@@ -189,26 +188,99 @@
 -define:UNITY_TEAM_LICENSE
 -define:ENABLE_VSTU
 -define:CROSS_PLATFORM_INPUT
-Assets/SampleScenes/Menu/Scripts/MenuSceneLoader.cs
-Assets/SampleScenes/Menu/Scripts/PauseMenu.cs
-Assets/SampleScenes/Menu/Scripts/SceneAndURLLoader.cs
-Assets/SampleScenes/Scripts/CameraSwitch.cs
-Assets/SampleScenes/Scripts/LevelReset.cs
-Assets/SampleScenes/Scripts/ParticleSceneControls.cs
-Assets/SampleScenes/Scripts/PlaceTargetWithMouse.cs
-Assets/SampleScenes/Scripts/SlowMoButton.cs
-Assets/Scripts/Destroy.cs
-Assets/Scripts/DuplicateDestroy.cs
-Assets/Scripts/Floor_gene.cs
-Assets/Scripts/SplitCamera.cs
-Assets/Scripts/Wall_gene.cs
-Assets/UnityChan/Scripts/CameraController.cs
-Assets/UnityChan/Scripts/FaceUpdate.cs
-Assets/UnityChan/Scripts/IdleChanger.cs
-Assets/UnityChan/Scripts/SceneLoader.cs
-Assets/UnityChan/Scripts/ThirdPersonCamera.cs
-Assets/UnityChan/Scripts/UnityChanControlScriptWithRgidBody.cs
-Assets/UnityChan/Scripts/UnityChanControlScriptWithRgidBody2.cs
-Assets/UnityChan/Scripts/UnityChanControlScriptWithRgidBody3.cs
-Assets/UnityChan/Scripts/UnityChanControlScriptWithRgidBody4.cs
+"Assets/Standard Assets/2D/Scripts/Camera2DFollow.cs"
+"Assets/Standard Assets/2D/Scripts/CameraFollow.cs"
+"Assets/Standard Assets/2D/Scripts/Platformer2DUserControl.cs"
+"Assets/Standard Assets/2D/Scripts/PlatformerCharacter2D.cs"
+"Assets/Standard Assets/2D/Scripts/Restarter.cs"
+"Assets/Standard Assets/Cameras/Scripts/AbstractTargetFollower.cs"
+"Assets/Standard Assets/Cameras/Scripts/AutoCam.cs"
+"Assets/Standard Assets/Cameras/Scripts/FreeLookCam.cs"
+"Assets/Standard Assets/Cameras/Scripts/HandHeldCam.cs"
+"Assets/Standard Assets/Cameras/Scripts/LookatTarget.cs"
+"Assets/Standard Assets/Cameras/Scripts/PivotBasedCameraRig.cs"
+"Assets/Standard Assets/Cameras/Scripts/ProtectCameraFromWallClip.cs"
+"Assets/Standard Assets/Cameras/Scripts/TargetFieldOfView.cs"
+"Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/FirstPersonController.cs"
+"Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/HeadBob.cs"
+"Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/MouseLook.cs"
+"Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/RigidbodyFirstPersonController.cs"
+"Assets/Standard Assets/Characters/RollerBall/Scripts/Ball.cs"
+"Assets/Standard Assets/Characters/RollerBall/Scripts/BallUserControl.cs"
+"Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/AICharacterControl.cs"
+"Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonCharacter.cs"
+"Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonUserControl.cs"
+"Assets/Standard Assets/CrossPlatformInput/Scripts/AxisTouchButton.cs"
+"Assets/Standard Assets/CrossPlatformInput/Scripts/ButtonHandler.cs"
+"Assets/Standard Assets/CrossPlatformInput/Scripts/CrossPlatformInputManager.cs"
+"Assets/Standard Assets/CrossPlatformInput/Scripts/InputAxisScrollbar.cs"
+"Assets/Standard Assets/CrossPlatformInput/Scripts/Joystick.cs"
+"Assets/Standard Assets/CrossPlatformInput/Scripts/MobileControlRig.cs"
+"Assets/Standard Assets/CrossPlatformInput/Scripts/PlatformSpecific/MobileInput.cs"
+"Assets/Standard Assets/CrossPlatformInput/Scripts/PlatformSpecific/StandaloneInput.cs"
+"Assets/Standard Assets/CrossPlatformInput/Scripts/TiltInput.cs"
+"Assets/Standard Assets/CrossPlatformInput/Scripts/TouchPad.cs"
+"Assets/Standard Assets/CrossPlatformInput/Scripts/VirtualInput.cs"
+"Assets/Standard Assets/Environment/Water (Basic)/Scripts/WaterBasic.cs"
+"Assets/Standard Assets/Environment/Water/Water/Scripts/Displace.cs"
+"Assets/Standard Assets/Environment/Water/Water/Scripts/GerstnerDisplace.cs"
+"Assets/Standard Assets/Environment/Water/Water/Scripts/MeshContainer.cs"
+"Assets/Standard Assets/Environment/Water/Water/Scripts/PlanarReflection.cs"
+"Assets/Standard Assets/Environment/Water/Water/Scripts/SpecularLighting.cs"
+"Assets/Standard Assets/Environment/Water/Water/Scripts/Water.cs"
+"Assets/Standard Assets/Environment/Water/Water/Scripts/WaterBase.cs"
+"Assets/Standard Assets/Environment/Water/Water/Scripts/WaterTile.cs"
+"Assets/Standard Assets/ParticleSystems/Scripts/AfterburnerPhysicsForce.cs"
+"Assets/Standard Assets/ParticleSystems/Scripts/ExplosionFireAndDebris.cs"
+"Assets/Standard Assets/ParticleSystems/Scripts/ExplosionPhysicsForce.cs"
+"Assets/Standard Assets/ParticleSystems/Scripts/Explosive.cs"
+"Assets/Standard Assets/ParticleSystems/Scripts/ExtinguishableParticleSystem.cs"
+"Assets/Standard Assets/ParticleSystems/Scripts/FireLight.cs"
+"Assets/Standard Assets/ParticleSystems/Scripts/Hose.cs"
+"Assets/Standard Assets/ParticleSystems/Scripts/ParticleSystemMultiplier.cs"
+"Assets/Standard Assets/ParticleSystems/Scripts/SmokeParticles.cs"
+"Assets/Standard Assets/ParticleSystems/Scripts/WaterHoseParticles.cs"
+"Assets/Standard Assets/Utility/ActivateTrigger.cs"
+"Assets/Standard Assets/Utility/AlphaButtonClickMask.cs"
+"Assets/Standard Assets/Utility/AutoMobileShaderSwitch.cs"
+"Assets/Standard Assets/Utility/AutoMoveAndRotate.cs"
+"Assets/Standard Assets/Utility/CameraRefocus.cs"
+"Assets/Standard Assets/Utility/CurveControlledBob.cs"
+"Assets/Standard Assets/Utility/DragRigidbody.cs"
+"Assets/Standard Assets/Utility/DynamicShadowSettings.cs"
+"Assets/Standard Assets/Utility/EventSystemChecker.cs"
+"Assets/Standard Assets/Utility/FollowTarget.cs"
+"Assets/Standard Assets/Utility/ForcedReset.cs"
+"Assets/Standard Assets/Utility/FOVKick.cs"
+"Assets/Standard Assets/Utility/FPSCounter.cs"
+"Assets/Standard Assets/Utility/LerpControlledBob.cs"
+"Assets/Standard Assets/Utility/ObjectResetter.cs"
+"Assets/Standard Assets/Utility/ParticleSystemDestroyer.cs"
+"Assets/Standard Assets/Utility/PlatformSpecificContent.cs"
+"Assets/Standard Assets/Utility/SimpleActivatorMenu.cs"
+"Assets/Standard Assets/Utility/SimpleMouseRotator.cs"
+"Assets/Standard Assets/Utility/SmoothFollow.cs"
+"Assets/Standard Assets/Utility/TimedObjectActivator.cs"
+"Assets/Standard Assets/Utility/TimedObjectDestructor.cs"
+"Assets/Standard Assets/Utility/WaypointCircuit.cs"
+"Assets/Standard Assets/Utility/WaypointProgressTracker.cs"
+"Assets/Standard Assets/Vehicles/Aircraft/Scripts/AeroplaneAiControl.cs"
+"Assets/Standard Assets/Vehicles/Aircraft/Scripts/AeroplaneAudio.cs"
+"Assets/Standard Assets/Vehicles/Aircraft/Scripts/AeroplaneController.cs"
+"Assets/Standard Assets/Vehicles/Aircraft/Scripts/AeroplaneControlSurfaceAnimator.cs"
+"Assets/Standard Assets/Vehicles/Aircraft/Scripts/AeroplanePropellerAnimator.cs"
+"Assets/Standard Assets/Vehicles/Aircraft/Scripts/AeroplaneUserControl2Axis.cs"
+"Assets/Standard Assets/Vehicles/Aircraft/Scripts/AeroplaneUserControl4Axis.cs"
+"Assets/Standard Assets/Vehicles/Aircraft/Scripts/JetParticleEffect.cs"
+"Assets/Standard Assets/Vehicles/Aircraft/Scripts/LandingGear.cs"
+"Assets/Standard Assets/Vehicles/Car/Scripts/BrakeLight.cs"
+"Assets/Standard Assets/Vehicles/Car/Scripts/CarAIControl.cs"
+"Assets/Standard Assets/Vehicles/Car/Scripts/CarAudio.cs"
+"Assets/Standard Assets/Vehicles/Car/Scripts/CarController.cs"
+"Assets/Standard Assets/Vehicles/Car/Scripts/CarSelfRighting.cs"
+"Assets/Standard Assets/Vehicles/Car/Scripts/CarUserControl.cs"
+"Assets/Standard Assets/Vehicles/Car/Scripts/Mudguard.cs"
+"Assets/Standard Assets/Vehicles/Car/Scripts/SkidTrail.cs"
+"Assets/Standard Assets/Vehicles/Car/Scripts/Suspension.cs"
+"Assets/Standard Assets/Vehicles/Car/Scripts/WheelEffects.cs"
 -lib:"C:\Program Files\Unity\Editor\Data\MonoBleedingEdge\lib\mono\unity"
