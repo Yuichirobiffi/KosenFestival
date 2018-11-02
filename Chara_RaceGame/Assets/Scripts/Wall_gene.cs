@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class Wall_gene : MonoBehaviour {
 
-    public GameObject WallPrefab;
+    public GameObject WallPrefabX;
+    public GameObject WallPrefabZ;
     public GameObject SpeedUpPrefab;
     public GameObject SpeedDownPrefab;
 
     //定数
     private const int START_LENGTH = 20;　//縦の開始位置
-    private const int BOX_NUM = 57;　//箱の出てくる個数
-    private const int BOX_SPAN = 5;　//箱の出てくる頻度
-    private const int FLOOR_NUM = 92;　//床の出てくる個数
-    private const int FLOOR_SPAN = 3;　//床の出てくる頻度
+    private const int FLOOR_LENGTH = 5;　//床の幅
 
+    private const float WALL_HIGH = 0.75f;　//壁の高さ
+    private const int BOX_NUM = 33;　//壁の出てくる個数
+    private const int BOX_SPAN = 5; //壁の出てくる頻度
+
+    private const float SPEED_HIGH = 0.25f;　//スピード床の高さ
+    private const int FLOOR_NUM = 54;　//スピード床の出てくる個数
+    private const int FLOOR_SPAN = 3;　//スピード床の出てくる頻度
+    
     private int i;　//for文で使う変数
     private int num,ud; //なんか色々数を格納するやつ　前者はなんか色々使ってる　後者はUpかDownを分けるためのやつ
 
     //横の位置を格納
-    private int[] side = {-1,0,1,2,3};
+    private int[] side = {-2,-1,0,1,2};
 
-    //箱の縦の位置を格納
+    //壁の縦の位置を格納
     private int[] boxLengthPlus = new int[BOX_NUM];
     private int[] boxLengthMinus = new int[BOX_NUM];
 
@@ -31,26 +37,24 @@ public class Wall_gene : MonoBehaviour {
 
 
     void Start () {
-        //箱の縦の座標を格納
+        //壁の縦の座標を格納
         num = START_LENGTH;
         for (i = 0; i < BOX_NUM; i++){
             boxLengthPlus[i] = num;
             num += BOX_SPAN;
         }
-
         num = -START_LENGTH;
         for (i = 0; i < BOX_NUM; i++){
             boxLengthMinus[i] = num;
             num -= BOX_SPAN;
         }
 
-        //床の縦の座標を格納
+        //スピード床の縦の座標を格納
         num = START_LENGTH;
         for (i = 0; i < FLOOR_NUM; i++){
             floorLengthPlus[i] = num;
             num += FLOOR_SPAN;
         }
-
         num = -START_LENGTH;
         for (i = 0; i < FLOOR_NUM; i++){
             floorLengthMinus[i] = num;
@@ -59,99 +63,94 @@ public class Wall_gene : MonoBehaviour {
 
         //Player1
         for (i = 0;i < BOX_NUM; i++){
-            num = Random.Range(0, 6);
-            if (num != 5){
-                GameObject Wall = Instantiate(WallPrefab) as GameObject;
-                Wall.transform.position = new Vector3(side[num], 0.75f, boxLengthPlus[i]);
+            num = Random.Range(0, FLOOR_LENGTH + 1);
+            if (num != FLOOR_LENGTH){
+                GameObject Wall = Instantiate(WallPrefabZ) as GameObject;
+                Wall.transform.position = new Vector3(side[num], WALL_HIGH, boxLengthPlus[i]);
             }
         }//Player1 Wall
 
         for (i = 0; i < FLOOR_NUM; i++){
-            num = Random.Range(0, 6);
-            if (num != 5){
+            num = Random.Range(0, FLOOR_LENGTH + 1);
+            if (num != FLOOR_LENGTH){
                 ud = Random.Range(0, 2);
                 if(ud == 0){
                     GameObject SpeedUp = Instantiate(SpeedUpPrefab) as GameObject;
-                    SpeedUp.transform.position = new Vector3(side[num], 0.25f, floorLengthPlus[i]);
+                    SpeedUp.transform.position = new Vector3(side[num], SPEED_HIGH, floorLengthPlus[i]);
                 } else{
                     GameObject SpeedDown = Instantiate(SpeedDownPrefab) as GameObject;
-                    SpeedDown.transform.position = new Vector3(side[num], 0.25f, floorLengthPlus[i]);
+                    SpeedDown.transform.position = new Vector3(side[num], SPEED_HIGH, floorLengthPlus[i]);
                 }
             }
         }//Player1 Floor
 
         //Player2
-        for (i = 0; i < BOX_NUM; i++)
-        {
-            num = Random.Range(0, 6);
-            if (num != 5)
-            {
-                GameObject Wall = Instantiate(WallPrefab) as GameObject;
-                Wall.transform.position = new Vector3(boxLengthPlus[i], 0.75f, side[num]);
+        for (i = 0; i < BOX_NUM; i++){
+            num = Random.Range(0, FLOOR_LENGTH + 1);
+            if (num != FLOOR_LENGTH){
+                GameObject Wall = Instantiate(WallPrefabX) as GameObject;
+                Wall.transform.position = new Vector3(boxLengthPlus[i], WALL_HIGH, side[num]);
             }
         }//Player2 Wall
 
         for (i = 0; i < FLOOR_NUM; i++){
-            num = Random.Range(0, 6);
-            if (num != 5){
+            num = Random.Range(0, FLOOR_LENGTH + 1);
+            if (num != FLOOR_LENGTH){
                 ud = Random.Range(0, 2);
                 if (ud == 0){
                     GameObject SpeedUp = Instantiate(SpeedUpPrefab) as GameObject;
-                    SpeedUp.transform.position = new Vector3(floorLengthPlus[i], 0.25f, side[num]);
-                }
-                else{
+                    SpeedUp.transform.position = new Vector3(floorLengthPlus[i], SPEED_HIGH, side[num]);
+                } else{
                     GameObject SpeedDown = Instantiate(SpeedDownPrefab) as GameObject;
-                    SpeedDown.transform.position = new Vector3(floorLengthPlus[i], 0.25f, side[num]);
+                    SpeedDown.transform.position = new Vector3(floorLengthPlus[i], SPEED_HIGH, side[num]);
                 }
             }
         }//Player2 Floor
 
         //Player3
         for (i = 0; i < BOX_NUM; i++){
-            num = Random.Range(0, 6);
-            if (num != 5){
-                GameObject Wall = Instantiate(WallPrefab) as GameObject;
-                Wall.transform.position = new Vector3(side[num], 0.75f, boxLengthMinus[i]);
+            num = Random.Range(0, FLOOR_LENGTH + 1);
+            if (num != FLOOR_LENGTH){
+                GameObject Wall = Instantiate(WallPrefabZ) as GameObject;
+                Wall.transform.position = new Vector3(side[num], WALL_HIGH, boxLengthMinus[i]);
             }
         }//Player3 Wall
 
         for (i = 0; i < FLOOR_NUM; i++){
-            num = Random.Range(0, 6);
-            if (num != 5){
+            num = Random.Range(0, FLOOR_LENGTH + 1);
+            if (num != FLOOR_LENGTH){
                 ud = Random.Range(0, 2);
                 if (ud == 0){
                     GameObject SpeedUp = Instantiate(SpeedUpPrefab) as GameObject;
-                    SpeedUp.transform.position = new Vector3(side[num], 0.25f, floorLengthMinus[i]);
+                    SpeedUp.transform.position = new Vector3(side[num], SPEED_HIGH, floorLengthMinus[i]);
                 } else{
                     GameObject SpeedDown = Instantiate(SpeedDownPrefab) as GameObject;
-                    SpeedDown.transform.position = new Vector3(side[num], 0.25f, floorLengthMinus[i]);
+                    SpeedDown.transform.position = new Vector3(side[num], SPEED_HIGH, floorLengthMinus[i]);
                 }
             }
         }//Player3 Floor
 
         //Player4
         for (i = 0; i < BOX_NUM; i++){
-            num = Random.Range(0, 6);
-            if (num != 5){
-                GameObject Wall = Instantiate(WallPrefab) as GameObject;
-                Wall.transform.position = new Vector3(boxLengthMinus[i], 0.75f, side[num]);
+            num = Random.Range(0, FLOOR_LENGTH + 1);
+            if (num != FLOOR_LENGTH){
+                GameObject Wall = Instantiate(WallPrefabX) as GameObject;
+                Wall.transform.position = new Vector3(boxLengthMinus[i], WALL_HIGH, side[num]);
             }
         }//Player4 Wall
 
         for (i = 0; i < FLOOR_NUM; i++){
-            num = Random.Range(0, 6);
-            if (num != 5){
+            num = Random.Range(0, FLOOR_LENGTH + 1);
+            if (num != FLOOR_LENGTH){
                 ud = Random.Range(0, 2);
                 if (ud == 0){
                     GameObject SpeedUp = Instantiate(SpeedUpPrefab) as GameObject;
-                    SpeedUp.transform.position = new Vector3(floorLengthMinus[i], 0.25f, side[num]);
-                }
-                else{
+                    SpeedUp.transform.position = new Vector3(floorLengthMinus[i], SPEED_HIGH, side[num]);
+                } else{
                     GameObject SpeedDown = Instantiate(SpeedDownPrefab) as GameObject;
-                    SpeedDown.transform.position = new Vector3(floorLengthMinus[i], 0.25f, side[num]);
+                    SpeedDown.transform.position = new Vector3(floorLengthMinus[i], SPEED_HIGH, side[num]);
                 }
             }
         }//Player4 Floor
-
     }
 }

@@ -39,7 +39,11 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
 
     // ゴール してる：0 してない:1
     public float is_Goaling_Not = 1.0f;
-    
+
+    // ボタン押すと5回呼ばれるからこれで抑制しよう
+    public int btnClkd = 0;
+    public int btnClka = 0;
+
     /* アニメーター各ステートへの参照
     static int idleState = Animator.StringToHash("Base Layer.Idle");
     static int locoState = Animator.StringToHash("Base Layer.Locomotion");
@@ -60,9 +64,8 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
         orgColHight = col.height;
         orgVectColCenter = col.center;
         //位置初期化
-        transform.position = new Vector3(10.0f, 0.25f, 1.0f);
+        transform.position = new Vector3(10.0f, 0.25f, 0.0f);
     }
-
 
     // 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
     void FixedUpdate(){
@@ -76,8 +79,6 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
         rb.useGravity = true;
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        //Jumpアニメ停止
-        anim.SetBool("Jump", false);
         //前進アニメ常時設定
         anim.SetFloat("Speed", 1);
 
@@ -86,20 +87,16 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
         Vector3 pos = myTransForm.position;
 
         //位置ズレ防止用
-        if (pos.z < -0.5){
+        if (pos.z < -1.5){
+            pos.z = -2;
+        } else if (pos.z < -0.5){
             pos.z = -1;
-        }
-        else if (pos.z < 0.5){
+        } else if (pos.z < 0.5){
             pos.z = 0;
-        }
-        else if (pos.z < 1.5){
+        } else if (pos.z < 1.5){
             pos.z = 1;
-        }
-        else if (pos.z < 2.5){
+        } else{
             pos.z = 2;
-        }
-        else{
-            pos.z = 3;
         }
 
         //前移動
@@ -113,36 +110,23 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
 
         //右移動
         if (Input.GetKeyDown(KeyCode.D)){
-            //移動しすぎ防止に使うやつ
-            Vector3 old = pos;
+            btnClkd += 1;
             //移動制限
-            if (pos.z >= -0.5) {
-                //Jumpアニメ開始
-                anim.SetBool("Jump", true);
-                //横移動
+            if (pos.z >= -1.5 && btnClkd >= 5) {
+                btnClkd = 0;
                 pos.z -= 1.0f * is_Goaling_Not;
                 myTransForm.position = pos;
-                //移動しすぎ防止用
-                if (old.z - pos.z > 1.5){
-                    pos.z += 1.0f * is_Goaling_Not;
-                }
             }
         }
+
         //左移動
         if (Input.GetKeyDown(KeyCode.A)){
-            //移動しすぎ防止に使うやつ
-            Vector3 old = pos;
+            btnClka += 1;
             //移動制限
-            if (pos.z <= 2.5) {
-                //Jumpアニメ開始
-                anim.SetBool("Jump", true);
-                //横移動
+            if (pos.z <= 1.5 && btnClka >= 5) {
+                btnClka = 0;
                 pos.z += 1.0f * is_Goaling_Not;
                 myTransForm.position = pos;
-                //移動しすぎ防止用
-                if (pos.z - old.z > 1.5){
-                    pos.z -= 1.0f * is_Goaling_Not;
-                }
             }
         }
     }
@@ -160,9 +144,8 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
     }
     */
 
-    // キャラクターのコライダーサイズのリセット関数
+    //よくわからん
     void resetCollider(){
-        // コンポーネントのHeight、Centerの初期値を戻す
         col.height = orgColHight;
         col.center = orgVectColCenter;
     }
@@ -170,19 +153,26 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
     //Goal判定
     private void OnCollisionEnter(Collision other){
         if(other.gameObject.tag == "goal"){
-            //180度回転
-            transform.Rotate(0,180, 0);
             //ゴールアニメ開始
             anim.SetBool("Goal", true);
             //前進アニメ停止
             anim.SetFloat("Speed", 0);
             //これで、横、前進移動停止
             is_Goaling_Not = 0;
-            
         }
 
+        if (other.gameObject.tag == "wall"){
+            //後跳んでけ
+            Rigidbody RB = this.GetComponent<Rigidbody>();
+            Vector3 force = new Vector3(-30.0f, 0, 0);
+            RB.AddForce(force, ForceMode.Impulse);
+            //Debug.Log(forwardSpeed);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "speedup"){
-            //前進速度上昇
+            //前進速度増加
             forwardSpeed += 0.3f;
             //Debug.Log(forwardSpeed);
         }
@@ -192,17 +182,5 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
             forwardSpeed -= 0.3f;
             //Debug.Log(forwardSpeed);
         }
-
-        if (other.gameObject.tag == "wall"){
-            //Jumpアニメーションを流用します。
-            anim.SetBool("Jump", true);
-            //後跳んでけ
-            Rigidbody RB = this.GetComponent<Rigidbody>();
-            Vector3 force = new Vector3(-80.0f, 0, 0);
-            RB.AddForce(force, ForceMode.Impulse);
-            //Debug.Log(forwardSpeed);
-        }
-
     }
-
 }

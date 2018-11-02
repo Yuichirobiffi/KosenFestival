@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Destroy : MonoBehaviour {
     private void OnCollisionEnter(Collision other){
-        //壁とプレイヤーぶつかったら壁破壊
-        Destroy(gameObject);
+        if (other.gameObject.tag == "Player"){
+            Destroy(gameObject);
+        }
     }
 }
