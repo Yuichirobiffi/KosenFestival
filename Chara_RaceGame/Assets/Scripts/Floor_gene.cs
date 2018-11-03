@@ -5,110 +5,59 @@ using UnityEngine;
 public class Floor_gene : MonoBehaviour {
 
     public GameObject FloorPrefabX;
-    public GameObject GoalPrefabX;
     public GameObject FloorPrefabZ;
+    public GameObject GoalPrefabX;
     public GameObject GoalPrefabZ;
 
     private float i, j;
 
-	// Use this for initialization
-	void Start () {
+    //定数
+    private const float LOAD_LONG = 210.0f; //長さ
+    private const float LOAD_START = 10.0f; //開始位置
 
-        for (i=10.0f;i<211.0f;i++)
-        {
-            //for (j=-1.0f;j<4.0f;j++)
-            //{
-            if (i == 210.0f)
-            {
+    void Start () {
+
+        for (i = LOAD_START; i <= LOAD_LONG; i++){
+            if (i == LOAD_LONG){
                 GameObject Goal = Instantiate(GoalPrefabX) as GameObject;
                 Goal.transform.position = new Vector3(0.0f, 0.0f, 0.0f + i);
-            }
-            else
-            {
+            } else{
                 GameObject Floor = Instantiate(FloorPrefabX) as GameObject;
                 Floor.transform.position = new Vector3(0.0f, 0.0f, 0.0f + i);
             }
-            //}
-            
         }
-        
-        //Goal
-        //for (j=-1.0f;j<4.0f;j++)
-        //{
-            
-        //}
 
         //90度////////////////////////////////////////////////////////////////////
-        for (i = 10.0f; i < 211.0f; i++)
-        {
-            //for (j = -1.0f; j < 4.0f; j++)
-            //{
-            if (i == 210.0f)
-            {
+        for (i = LOAD_START; i <= LOAD_LONG; i++){
+            if (i == LOAD_LONG){
                 GameObject Goal = Instantiate(GoalPrefabZ) as GameObject;
                 Goal.transform.position = new Vector3(0.0f + i, 0.0f, 0.0f);
-            }
-            else
-            {
+            } else{
                 GameObject Floor = Instantiate(FloorPrefabZ) as GameObject;
                 Floor.transform.position = new Vector3(0.0f + i, 0.0f, 0.0f);
             }
-            //}
         }
 
-        //Goal////////////////////////////////////////////////////////////////////
-        //for (j = -1.0f; j < 4.0f; j++)
-        //{
-
-        //}
-
         //180度////////////////////////////////////////////////////////////////////
-        for (i = -10.0f; i > -211.0f; i--)
-        {
-            //for (j = -1.0f; j < 4.0f; j++)
-            //{
-            if (i == -210.0f)
-            {
+        for (i = -LOAD_START; i >= -LOAD_LONG; i--){
+            if (i == -LOAD_LONG){
                 GameObject Goal = Instantiate(GoalPrefabX) as GameObject;
                 Goal.transform.position = new Vector3(0.0f, 0.0f, 0.0f + i);
-            }
-            else
-            {
+            } else{
                 GameObject Floor = Instantiate(FloorPrefabX) as GameObject;
                 Floor.transform.position = new Vector3(0.0f, 0.0f, 0.0f + i);
             }
-            //}
         }
 
-        //Goal////////////////////////////////////////////////////////////////////
-        //for (j = -1.0f; j < 4.0f; j++)
-        //{
-
-        //}
-
         //270度////////////////////////////////////////////////////////////////////
-        for (i = -10.0f; i > -211.0f; i--)
-        {
-            //for (j = -1.0f; j < 4.0f; j++)
-            //{
-            if (i == -210.0f)
-            {
+        for (i = -LOAD_START; i >= -LOAD_LONG; i--){
+            if (i == -LOAD_LONG){
                 GameObject Goal = Instantiate(GoalPrefabZ) as GameObject;
                 Goal.transform.position = new Vector3(0.0f + i, 0.0f, 0.0f);
-            }
-            else
-            {
+            }else{
                 GameObject Floor = Instantiate(FloorPrefabZ) as GameObject;
                 Floor.transform.position = new Vector3(0.0f + i, 0.0f, 0.0f);
             }
-            //}
         }
-
-        //Goal////////////////////////////////////////////////////////////////////
-        //for (j = -1.0f; j < 4.0f; j++)
-        //{
-
-        //}
     }
-
 }

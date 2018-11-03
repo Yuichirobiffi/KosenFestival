@@ -14,11 +14,9 @@ using System.Collections;
 public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
 
     //よくわからん
-    public float animSpeed = 1.5f;
     public float lookSmoother = 3.0f;
     public bool useCurves = true;
     public float useCurvesHeight = 0.5f;
-
     // キャラクターコントローラ（カプセルコライダ）の参照
     private CapsuleCollider col;
     private Rigidbody rb;
@@ -29,10 +27,10 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
     private Vector3 orgVectColCenter;
     // キャラにアタッチされるアニメーターへの参照
     private Animator anim;
-    // base layerで使われる、アニメーターの現在の状態の参照
-    //private AnimatorStateInfo currentBaseState;
-    // メインカメラへの参照
-    //private GameObject cameraObject;
+    //
+
+    //アニメーションのスピード
+    public float animSpeed = 1.5f;
 
     // 前進速度
     public float forwardSpeed = 7.0f;
@@ -40,44 +38,36 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
     // ゴール してる：0 してない:1
     public float is_Goaling_Not = 1.0f;
 
-    // ボタン押すと5回呼ばれるからこれで抑制しよう
-    public int btnClkd = 0;
-    public int btnClka = 0;
-
-    /* アニメーター各ステートへの参照
-    static int idleState = Animator.StringToHash("Base Layer.Idle");
-    static int locoState = Animator.StringToHash("Base Layer.Locomotion");
-    static int jumpState = Animator.StringToHash("Base Layer.Jump");
-    static int restState = Animator.StringToHash("Base Layer.Rest");
-    */
+    //定数
+    private int[] SIDE = { -2, -1, 0, 1, 2 }; //横の座標を格納
+    private float[] TORELANCE = { -1.5f, -0.5f, 0.5f, 1.5f }; //許容範囲 
+    private const float ADD_SPEED = 0.3f; //スピード増減
+    private const float BACK_POWER = -50.0f; //後ろに吹っ飛ぶ力
 
     // 初期化
     void Start(){
+        //よくわからん
         // Animatorコンポーネントを取得する
         anim = GetComponent<Animator>();
         // CapsuleColliderコンポーネントを取得する（カプセル型コリジョン）
         col = GetComponent<CapsuleCollider>();
         rb = GetComponent<Rigidbody>();
-        //メインカメラを取得する
-        //cameraObject = GameObject.FindWithTag("MainCamera");
         // CapsuleColliderコンポーネントのHeight、Centerの初期値を保存する
         orgColHight = col.height;
         orgVectColCenter = col.center;
+        //
+
         //位置初期化
         transform.position = new Vector3(10.0f, 0.25f, 0.0f);
     }
 
-    // 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
-    void FixedUpdate(){
-
-        //よくわからん//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    void Update(){
+        //よくわからん
         // Animatorのモーション再生速度に animSpeedを設定する
         anim.speed = animSpeed;
-        // 参照用のステート変数にBase Layer (0)の現在のステートを設定する
-        //currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
         //ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
         rb.useGravity = true;
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //
 
         //前進アニメ常時設定
         anim.SetFloat("Speed", 1);
@@ -87,33 +77,31 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
         Vector3 pos = myTransForm.position;
 
         //位置ズレ防止用
-        if (pos.z < -1.5){
-            pos.z = -2;
-        } else if (pos.z < -0.5){
-            pos.z = -1;
-        } else if (pos.z < 0.5){
-            pos.z = 0;
-        } else if (pos.z < 1.5){
-            pos.z = 1;
+        if (pos.z < TORELANCE[0]){
+            pos.z = SIDE[0];
+        } else if (pos.z < TORELANCE[1]){
+            pos.z = SIDE[1];
+        } else if (pos.z < TORELANCE[2]){
+            pos.z = SIDE[2];
+        } else if (pos.z < TORELANCE[3]){
+            pos.z = SIDE[3];
         } else{
-            pos.z = 2;
+            pos.z = SIDE[4];
         }
 
         //前移動
         velocity = new Vector3(0, 0, 1);
         // キャラクターのローカル空間での方向に変換
         velocity = transform.TransformDirection(velocity);
-        // 移動速度を掛ける
+        // 移動速度を掛ける(Goalしたらis_Goaling_Notが0になるから動かなくなる)
         velocity *= forwardSpeed * is_Goaling_Not;
         //キャラクター前進
-        transform.localPosition += velocity * Time.fixedDeltaTime;
+        transform.localPosition += velocity * Time.deltaTime;
 
         //右移動
         if (Input.GetKeyDown(KeyCode.D)){
-            btnClkd += 1;
             //移動制限
-            if (pos.z >= -1.5 && btnClkd >= 5) {
-                btnClkd = 0;
+            if (pos.z >= TORELANCE[0]) {
                 pos.z -= 1.0f * is_Goaling_Not;
                 myTransForm.position = pos;
             }
@@ -121,10 +109,8 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
 
         //左移動
         if (Input.GetKeyDown(KeyCode.A)){
-            btnClka += 1;
             //移動制限
-            if (pos.z <= 1.5 && btnClka >= 5) {
-                btnClka = 0;
+            if (pos.z <= TORELANCE[3]) {
                 pos.z += 1.0f * is_Goaling_Not;
                 myTransForm.position = pos;
             }
@@ -149,6 +135,7 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
         col.height = orgColHight;
         col.center = orgVectColCenter;
     }
+    //
 
     //Goal判定
     private void OnCollisionEnter(Collision other){
@@ -164,22 +151,21 @@ public class UnityChanControlScriptWithRgidBody2 : MonoBehaviour{
         if (other.gameObject.tag == "wall"){
             //後跳んでけ
             Rigidbody RB = this.GetComponent<Rigidbody>();
-            Vector3 force = new Vector3(-30.0f, 0, 0);
+            Vector3 force = new Vector3(BACK_POWER, 0, 0);
             RB.AddForce(force, ForceMode.Impulse);
-            //Debug.Log(forwardSpeed);
         }
     }
 
     private void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "speedup"){
             //前進速度増加
-            forwardSpeed += 0.3f;
+            forwardSpeed += ADD_SPEED;
             //Debug.Log(forwardSpeed);
         }
 
         if (other.gameObject.tag == "speeddown"){
             //前進速度低下
-            forwardSpeed -= 0.3f;
+            forwardSpeed -= ADD_SPEED;
             //Debug.Log(forwardSpeed);
         }
     }

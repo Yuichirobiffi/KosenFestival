@@ -1895,14 +1895,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9001bcbd91e76437cb0f52f12764f2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animSpeed: 1.5
   lookSmoother: 3
   useCurves: 1
   useCurvesHeight: 0.5
+  animSpeed: 1.5
   forwardSpeed: 7
   is_Goaling_Not: 1
-  btnClkd: 0
-  btnClka: 0
 --- !u!95 &111707307
 Animator:
   serializedVersion: 3
@@ -8957,14 +8955,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e76484c8e928440951b6c97d79419a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animSpeed: 1.5
   lookSmoother: 3
   useCurves: 1
   useCurvesHeight: 0.5
+  animSpeed: 1.5
   forwardSpeed: 7
   is_Goaling_Not: 1
-  btnClkd: 0
-  btnClka: 0
 --- !u!95 &620090453
 Animator:
   serializedVersion: 3
@@ -13173,14 +13169,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353c0a714b3592d458f8bd7030966838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animSpeed: 1.5
   lookSmoother: 3
   useCurves: 1
   useCurvesHeight: 0.5
+  animSpeed: 1.5
   forwardSpeed: 7
   is_Goaling_Not: 1
-  btnClkd: 0
-  btnClka: 0
 --- !u!95 &987389849
 Animator:
   serializedVersion: 3
@@ -15246,14 +15240,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654dee116a453944f90f419ed5d3f942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animSpeed: 1.5
   lookSmoother: 3
   useCurves: 1
   useCurvesHeight: 0.5
+  animSpeed: 1.5
   forwardSpeed: 7
   is_Goaling_Not: 1
-  btnClkd: 0
-  btnClka: 0
 --- !u!95 &1153652455
 Animator:
   serializedVersion: 3
@@ -25943,9 +25935,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloorPrefabX: {fileID: 1463979458935992, guid: cff3fb6201dd3404092bb9c0966f2164,
     type: 2}
-  GoalPrefabX: {fileID: 1519982377775658, guid: 5e163be86cb8e324da607dd94f7c2dec,
-    type: 2}
   FloorPrefabZ: {fileID: 1463979458935992, guid: 0e4f4f8fcdfb2574d92a204e7e2335d1,
+    type: 2}
+  GoalPrefabX: {fileID: 1519982377775658, guid: 5e163be86cb8e324da607dd94f7c2dec,
     type: 2}
   GoalPrefabZ: {fileID: 1519982377775658, guid: 05583e2b373b97542847e1da3a2171a0,
     type: 2}
