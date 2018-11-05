@@ -38,11 +38,14 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour{
     // ゴール してる：0 してない:1
     public float is_Goaling_Not = 1.0f;
 
+    //タイマーの秒数
+    public float timeCount = 5.0f;
+
     //定数
     private int[] SIDE = { -2, -1, 0, 1, 2 }; //横の座標を格納
     private float[] TORELANCE = { -1.5f, -0.5f, 0.5f, 1.5f }; //許容範囲 
     private const float ADD_SPEED = 0.3f; //スピード増減
-    private const float BACK_POWER = -50.0f; //後ろに吹っ飛ぶ力
+    private const float BACK_POWER = -25.0f; //後ろに吹っ飛ぶ力
 
     // 初期化
     void Start(){
@@ -62,9 +65,15 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour{
     }
 
     void Update(){
-        //よくわからん
-        // Animatorのモーション再生速度に animSpeedを設定する
-        anim.speed = animSpeed;
+        if (timeCount >= 0){
+            timeCount -= Time.deltaTime;
+            Debug.Log(timeCount);
+        }
+
+        if (timeCount <= 0){
+            //よくわからん
+            // Animatorのモーション再生速度に animSpeedを設定する
+            anim.speed = animSpeed;
         //ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
         rb.useGravity = true;
         //
@@ -109,10 +118,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour{
 
         //左移動
         if (Input.GetKeyDown(KeyCode.A)){
-            //移動制限
-            if (pos.x >= TORELANCE[0]){
-                pos.x -= 1.0f * is_Goaling_Not;
-                myTransForm.position = pos;
+                //移動制限
+                if (pos.x >= TORELANCE[0]){
+                    pos.x -= 1.0f * is_Goaling_Not;
+                    myTransForm.position = pos;
+                }
             }
         }
     }

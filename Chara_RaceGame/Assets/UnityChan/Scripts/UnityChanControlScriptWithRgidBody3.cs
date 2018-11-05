@@ -38,11 +38,14 @@ public class UnityChanControlScriptWithRgidBody3 : MonoBehaviour{
     // ゴール してる：0 してない:1
     public float is_Goaling_Not = 1.0f;
 
+    //タイマーの秒数
+    public float timeCount = 5.0f;
+
     //定数
     private int[] SIDE = { -2, -1, 0, 1, 2 }; //横の座標を格納
     private float[] TORELANCE = { -1.5f, -0.5f, 0.5f, 1.5f }; //許容範囲 
     private const float ADD_SPEED = 0.3f; //スピード増減
-    private const float BACK_POWER = 50.0f; //後ろに吹っ飛ぶ力
+    private const float BACK_POWER = 25.0f; //後ろに吹っ飛ぶ力
 
     // 初期化
     void Start(){
@@ -62,57 +65,68 @@ public class UnityChanControlScriptWithRgidBody3 : MonoBehaviour{
     }
 
     void Update(){
-        //よくわからん
-        // Animatorのモーション再生速度に animSpeedを設定する
-        anim.speed = animSpeed;
-        //ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
-        rb.useGravity = true;
-        //
-
-        //前進アニメ常時設定
-        anim.SetFloat("Speed", 1);
-
-        //現在位置取得
-        Transform myTransForm = this.transform;
-        Vector3 pos = myTransForm.position;
-
-        //位置ズレ防止用
-        if (pos.x < TORELANCE[0]){
-            pos.x = SIDE[0];
-        } else if (pos.x < TORELANCE[1]){
-            pos.x = SIDE[1];
-        } else if (pos.x < TORELANCE[2]){
-            pos.x = SIDE[2];
-        } else if (pos.x < TORELANCE[3]){
-            pos.x = SIDE[3];
-        } else{
-            pos.x = SIDE[4];
+        if (timeCount >= 0){
+            timeCount -= Time.deltaTime;
+            Debug.Log(timeCount);
         }
 
-        //前移動
-        velocity = new Vector3(0, 0, 1);
-        // キャラクターのローカル空間での方向に変換
-        velocity = transform.TransformDirection(velocity);
-        // 移動速度を掛ける(Goalしたらis_Goaling_Notが0になるから動かなくなる)
-        velocity *= forwardSpeed * is_Goaling_Not;
-        //キャラクター前進
-        transform.localPosition += velocity * Time.deltaTime;
+        if (timeCount <= 0){
+            //よくわからん
+            // Animatorのモーション再生速度に animSpeedを設定する
+            anim.speed = animSpeed;
+            //ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
+            rb.useGravity = true;
+            //
 
-        //右移動
-        if (Input.GetKeyDown(KeyCode.D)){
-            //移動制限
-            if (pos.x >= TORELANCE[0]){
-                pos.x -= 1.0f * is_Goaling_Not;
-                myTransForm.position = pos;
+            //前進アニメ常時設定
+            anim.SetFloat("Speed", 1);
+
+            //現在位置取得
+            Transform myTransForm = this.transform;
+            Vector3 pos = myTransForm.position;
+
+            //位置ズレ防止用
+            if (pos.x < TORELANCE[0]){
+                pos.x = SIDE[0];
             }
-        }
+            else if (pos.x < TORELANCE[1]){
+                pos.x = SIDE[1];
+            }
+            else if (pos.x < TORELANCE[2]){
+                pos.x = SIDE[2];
+            }
+            else if (pos.x < TORELANCE[3]){
+                pos.x = SIDE[3];
+            }
+            else{
+                pos.x = SIDE[4];
+            }
 
-        //左移動
-        if (Input.GetKeyDown(KeyCode.A)){
-            //移動制限
-            if (pos.x <= TORELANCE[3]) {
-                pos.x += 1.0f * is_Goaling_Not;
-                myTransForm.position = pos;
+            //前移動
+            velocity = new Vector3(0, 0, 1);
+            // キャラクターのローカル空間での方向に変換
+            velocity = transform.TransformDirection(velocity);
+            // 移動速度を掛ける(Goalしたらis_Goaling_Notが0になるから動かなくなる)
+            velocity *= forwardSpeed * is_Goaling_Not;
+            //キャラクター前進
+            transform.localPosition += velocity * Time.deltaTime;
+
+            //右移動
+            if (Input.GetKeyDown(KeyCode.D)){
+                //移動制限
+                if (pos.x >= TORELANCE[0]){
+                    pos.x -= 1.0f * is_Goaling_Not;
+                    myTransForm.position = pos;
+                }
+            }
+
+            //左移動
+            if (Input.GetKeyDown(KeyCode.A)){
+                //移動制限
+                if (pos.x <= TORELANCE[3]){
+                    pos.x += 1.0f * is_Goaling_Not;
+                    myTransForm.position = pos;
+                }
             }
         }
     }

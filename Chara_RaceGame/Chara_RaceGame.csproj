@@ -303,6 +303,7 @@
     <Compile Include="Assets\Scripts\DuplicateDestroy.cs" />
     <Compile Include="Assets\Scripts\Floor_gene.cs" />
     <Compile Include="Assets\Scripts\SplitCamera.cs" />
+    <Compile Include="Assets\Scripts\Start.cs" />
     <Compile Include="Assets\Scripts\Wall_gene.cs" />
     <Compile Include="Assets\UnityChan\Scripts\CameraController.cs" />
     <Compile Include="Assets\UnityChan\Scripts\FaceUpdate.cs" />
