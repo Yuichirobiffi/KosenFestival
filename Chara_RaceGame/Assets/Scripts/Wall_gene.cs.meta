@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 26d8a87c35c9a9e4bb649a4e8bc5827b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - WallPrefab: {fileID: 1463979458935992, guid: b4861289d2b37bf46bcecb4fd6113571,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
