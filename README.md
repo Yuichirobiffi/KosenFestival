@@ -1,6 +1,12 @@
 # KosenFestival
 これは、OPUCTの3-Eの出し物です。
-矢印キーの左右で動かすことができます。
+
+Playerはそれぞれ以下のキーで左右を入力
+
+1 aとd
+2 fとh
+3 jとl
+4 :と]
 
 
 PS3コントローラをWindowsに適用

@@ -108,7 +108,7 @@ public class unityChanControlScriptWithRgidBody2 : MonoBehaviour{
         transform.localPosition += velocity * Time.deltaTime;
 
         //右移動
-        if (Input.GetKeyDown(KeyCode.D)){
+        if (Input.GetButtonDown("Right2")){
             //移動制限
             if (pos.z >= TORELANCE[0]) {
                 pos.z -= 1.0f * is_Goaling_Not;
@@ -117,7 +117,7 @@ public class unityChanControlScriptWithRgidBody2 : MonoBehaviour{
         }
 
         //左移動
-        if (Input.GetKeyDown(KeyCode.A)){
+        if (Input.GetButtonDown("Left2")){
                 //移動制限
                 if (pos.z <= TORELANCE[3]){
                     pos.z += 1.0f * is_Goaling_Not;
