@@ -8,6 +8,7 @@ TagManager:
   - wall
   - speedup
   - speeddown
+  - box
   layers:
   - Default
   - TransparentFX
