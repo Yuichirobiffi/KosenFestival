@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall_gene : MonoBehaviour {
+public class wall_gene : MonoBehaviour {
 
     public GameObject WallPrefabX;
     public GameObject WallPrefabZ;

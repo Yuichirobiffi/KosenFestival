@@ -11,7 +11,7 @@ using System.Collections;
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
 
-public class UnityChanControlScriptWithRgidBody : MonoBehaviour{
+public class unityChanControlScriptWithRgidBody : MonoBehaviour{
 
     //よくわからん
     public float lookSmoother = 3.0f;
@@ -108,7 +108,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour{
         transform.localPosition += velocity * Time.deltaTime;
 
         //右移動
-        if (Input.GetButtonDown("Right Key")){
+        if (Input.GetButtonDown("Right")){
             //移動制限
             if (pos.x <= TORELANCE[3]) {
                 pos.x += 1.0f * is_Goaling_Not;
@@ -117,7 +117,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour{
         }
 
         //左移動
-        if (Input.GetButtonDown("Left Key")){
+        if (Input.GetButtonDown("Left")){
                 //移動制限
                 if (pos.x >= TORELANCE[0]){
                     pos.x -= 1.0f * is_Goaling_Not;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SplitCamera : MonoBehaviour
+public class splitCamera : MonoBehaviour
 {
     //　カメラの分割方法
     public enum SplitCameraMode

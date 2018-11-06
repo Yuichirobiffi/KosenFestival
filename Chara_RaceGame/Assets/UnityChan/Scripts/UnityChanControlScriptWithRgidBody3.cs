@@ -11,7 +11,7 @@ using System.Collections;
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Rigidbody))]
 
-public class UnityChanControlScriptWithRgidBody3 : MonoBehaviour{
+public class unityChanControlScriptWithRgidBody3 : MonoBehaviour{
 
     //よくわからん
     public float lookSmoother = 3.0f;
