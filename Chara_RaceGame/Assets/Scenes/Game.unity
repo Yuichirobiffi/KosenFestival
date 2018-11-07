@@ -19021,10 +19021,6 @@ MonoBehaviour:
   Player2: {fileID: 121073409}
   Player3: {fileID: 1809559617}
   Player4: {fileID: 458769629}
-  waku1: {fileID: 0}
-  waku2: {fileID: 0}
-  waku3: {fileID: 0}
-  waku4: {fileID: 0}
 --- !u!4 &1452258505
 Transform:
   m_ObjectHideFlags: 0
@@ -25978,7 +25974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeCount: 1.5
-  rank: 3
+  num: 0
 --- !u!4 &1963856379
 Transform:
   m_ObjectHideFlags: 0

@@ -291,6 +291,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -312,6 +313,10 @@
     <Compile Include="Assets\Scripts\SceneMover\EndSceneMover.cs" />
     <Compile Include="Assets\Scripts\SceneMover\GameSceneMover.cs" />
     <Compile Include="Assets\Scripts\SceneMover\StartSceneMover.cs" />
+    <Compile Include="Assets\Scripts\Select\Select_Text.cs" />
+    <Compile Include="Assets\Scripts\Select\Select_Text2.cs" />
+    <Compile Include="Assets\Scripts\Select\Select_Text3.cs" />
+    <Compile Include="Assets\Scripts\Select\Select_Text4.cs" />
     <Compile Include="Assets\Scripts\Start\Text_Deco.cs" />
     <Compile Include="Assets\Scripts\Start\Text_Deco2.cs" />
     <Compile Include="Assets\Scripts\Start\Text_Deco3.cs" />
