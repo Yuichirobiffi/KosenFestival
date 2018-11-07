@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Floor_gene : MonoBehaviour {
+public class floor_gene : MonoBehaviour {
 
     //for文用の
     private float i, j;

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chara_RaceGame.Plugins", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chara_RaceGame.Editor.Plugins", "Chara_RaceGame.Editor.Plugins.csproj", "{40563D2B-DC75-453C-27CB-36A6285829FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chara_RaceGame.Editor", "Chara_RaceGame.Editor.csproj", "{4D207556-7889-923A-BFC1-460EF5CC905F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{40563D2B-DC75-453C-27CB-36A6285829FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40563D2B-DC75-453C-27CB-36A6285829FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40563D2B-DC75-453C-27CB-36A6285829FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D207556-7889-923A-BFC1-460EF5CC905F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D207556-7889-923A-BFC1-460EF5CC905F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D207556-7889-923A-BFC1-460EF5CC905F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D207556-7889-923A-BFC1-460EF5CC905F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
